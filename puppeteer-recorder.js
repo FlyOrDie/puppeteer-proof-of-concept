@@ -21,11 +21,6 @@ module.exports.record = async function(options) {
 
   const ffmpeg = spawn(ffmpegPath, args);
 
-  ffmpeg.on('message', message => {
-    console.log('DATA!');
-    console.log(message);
-  });
-
   if (options.pipeOutput) {
     ffmpeg.stdout.pipe(process.stdout);
     ffmpeg.stderr.pipe(process.stderr);
