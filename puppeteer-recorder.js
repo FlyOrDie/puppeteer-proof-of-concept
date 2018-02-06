@@ -27,7 +27,11 @@ module.exports.record = async function(options) {
   }
 
   const closed = new Promise((resolve, reject) => {
-    ffmpeg.on('error', reject);
+    ffmpeg.on('error', (e) => {
+      console.log('ffmpeg error event caught');
+      console.log(e);
+      reject(e);
+    });
     ffmpeg.on('close', resolve);
   });
 
