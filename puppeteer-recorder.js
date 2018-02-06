@@ -39,16 +39,18 @@ module.exports.record = async function(options) {
 
     await options.render(browser, page, i);
 
-    let screenshot = await page.screenshot({ omitBackground: true });
-    console.log("SCREENSHOT");
-    console.log(screenshot);
+    const screenshot = await page.screenshot({ omitBackground: true });
 
     await write(ffmpeg.stdin, screenshot);
   }
 
   ffmpeg.stdin.end();
 
-  await closed;
+  try {
+    await closed;
+  } catch (e) {
+    console.log('ERROR CLOSING ffmpeg socket');
+  }
 };
 
 const ffmpegArgs = fps => [
@@ -72,8 +74,6 @@ const ffmpegArgs = fps => [
 const write = (stream, buffer) =>
   new Promise((resolve, reject) => {
     stream.write(buffer, error => {
-      console.log("BUFFER");
-      console.log(buffer);
       if (error) reject(error);
       else resolve();
     });
