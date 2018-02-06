@@ -6,8 +6,8 @@ const { record } = require('./puppeteer-recorder');
  * @param {object} options
  * @param {string} options.url               - Website to record video from.
  * @param {string} options.output            - Path to executable
- * @param {number=60} [options.fps]          - FPS parameter. Defaults to 60
- * @param {number=5} [options.recordingTime] - Length of video in seconds. Defaults to 5
+ * @param {number} [options.fps=60]          - FPS parameter. Defaults to 60
+ * @param {number} [options.recordingTime=5] - Length of video in seconds. Defaults to 5
  * @param {string} [options.executablePath]  - Path to Chrome executable. If not provided, will use Chromium by default.
  * @param {function} [options.prepare]       - Passed puppeteer browser and puppeteer page instances.
  * @param {function} [options.render]        - Passed puppeteer browser, page and frame instances.
