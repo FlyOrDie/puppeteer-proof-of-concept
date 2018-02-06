@@ -37,10 +37,22 @@ module.exports.record = async function(options) {
     }
 
     await options.render(browser, page, i);
+    let screenshot;
 
-    const screenshot = await page.screenshot({ omitBackground: true });
+    try {
+      screenshot = await page.screenshot({ omitBackground: true });
+    } catch (e) {
+      console.log('ERROR TAKING SCREENSHOT');
+      console.log(e);
+    }
 
-    await write(ffmpeg.stdin, screenshot);
+
+    try {
+      await write(ffmpeg.stdin, screenshot);
+    } catch (e) {
+      console.log('ERROR WRITING SCREENSHOT TO ffmpeg.stdin');
+      console.log(e);
+    }
   }
 
   ffmpeg.stdin.end();
