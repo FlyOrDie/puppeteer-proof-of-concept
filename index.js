@@ -4,13 +4,14 @@ const { record } = require('./puppeteer-recorder');
 /**
  *
  * @param {object} options
- * @param {string} options.url               - Website to record video from.
- * @param {string} options.output            - Path to executable
- * @param {number} [options.fps=60]          - FPS parameter. Defaults to 60
- * @param {number} [options.recordingTime=5] - Length of video in seconds. Defaults to 5
- * @param {string} [options.executablePath]  - Path to Chrome executable. If not provided, will use Chromium by default.
- * @param {function} [options.prepare]       - Passed puppeteer browser and puppeteer page instances.
- * @param {function} [options.render]        - Passed puppeteer browser, page and frame instances.
+ * @param {string} options.url                   - Website to record video from.
+ * @param {string} options.output                - Path to executable
+ * @param {number} [options.fps=60]              - FPS parameter. Defaults to 60
+ * @param {number} [options.recordingTime=5]     - Length of video in seconds. Defaults to 5
+ * @param {string} [options.executablePath]      - Path to Chrome executable. If not provided, will use Chromium by default.
+ * @param {function} [options.prepare]           - Passed puppeteer browser and puppeteer page instances.
+ * @param {function} [options.render]            - Passed puppeteer browser, page and frame instances.
+ * @param {boolean} [options.logEachFrame=false] - If some debug info should be present.
  *
  * @returns {Promise.<void>}
  */
@@ -41,7 +42,8 @@ module.exports = async (options) => {
     fps: options.fps,
     frames: options.fps * options.recordingTime,
     prepare: options.prepare || emptyFunc,
-    render: options.render || emptyFunc
+    render: options.render || emptyFunc,
+    logEachFrame: options.logEachFrame
   });
 
   await browser.close();

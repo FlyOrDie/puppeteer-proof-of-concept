@@ -32,10 +32,9 @@ module.exports.record = async function(options) {
   });
 
   for (let i = 1; i <= options.frames; i++) {
-    if (options.logEachFrame)
-      console.log(
-        `[puppeteer-recorder] rendering frame ${i} of ${options.frames}.`
-      );
+    if (options.logEachFrame) {
+      console.log(`[puppeteer-recorder] rendering frame ${i} of ${options.frames}.`);
+    }
 
     await options.render(browser, page, i);
 
@@ -49,7 +48,8 @@ module.exports.record = async function(options) {
   try {
     await closed;
   } catch (e) {
-    console.log('ERROR CLOSING ffmpeg socket');
+    console.log('ERROR CLOSING STREAM');
+    console.log(e);
   }
 };
 
