@@ -90,7 +90,11 @@ const ffmpegArgs = fps => [
 const write = (stream, buffer) =>
   new Promise((resolve, reject) => {
     stream.write(buffer, error => {
-      if (error) reject(error);
+      if (error) {
+        console.log('error in writing stream');
+        console.log(error);
+        reject(error);
+      }
       else resolve();
     });
   });

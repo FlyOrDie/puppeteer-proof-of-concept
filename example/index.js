@@ -8,4 +8,7 @@ updatedRecorder({
   logEachFrame: true
 }).then(() => {
   console.log('FINISHED CONVERTING!');
+}).catch(e => {
+  console.log('GLOBAL CATCH');
+  console.log(e);
 });
